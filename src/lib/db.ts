@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
 
+// 서버 사이드 전용 싱글톤 인스턴스 생성
 const prismaClientSingleton = () => {
   return new PrismaClient().$extends(withAccelerate());
 };
