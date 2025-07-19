@@ -1,0 +1,36 @@
+import { QUERY_KEYS } from "@/consts/constants";
+import { getPosts } from "@/features/posts/apis";
+import Posts from "@/features/posts/ui/posts";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+
+async function PostPage() {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: [QUERY_KEYS.POSTS],
+    queryFn: () => getPosts(true),
+    staleTime: 0,
+  });
+
+  const dehydratedState = dehydrate(queryClient);
+
+  return (
+    <HydrationBoundary state={dehydratedState}>
+      <div className="w-full h-16 flex flex-row bg-[#ff6600] items-center justify-start p-4 gap-4">
+        <p className="text-lg font-extrabold text-black">Prisma Study</p>
+        <a className="text-black cursor-pointer" href="/submit">
+          submit
+        </a>
+      </div>
+      <div className="bg-[#f6f6ef] h-full w-full">
+        <Posts />
+      </div>
+    </HydrationBoundary>
+  );
+}
+
+export default PostPage;
