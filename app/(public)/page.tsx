@@ -1,5 +1,6 @@
 import { QUERY_KEYS } from "@/consts/constants";
 import { getPosts } from "@/features/posts/apis";
+import PostLayout from "@/features/posts/ui/layout";
 import Posts from "@/features/posts/ui/posts";
 import {
   dehydrate,
@@ -20,15 +21,17 @@ async function PostPage() {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <div className="w-full h-16 flex flex-row bg-[#ff6600] items-center justify-start p-4 gap-4">
-        <p className="text-lg font-extrabold text-black">Prisma Study</p>
-        <a className="text-black cursor-pointer" href="/submit">
-          submit
-        </a>
-      </div>
-      <div className="bg-[#f6f6ef] h-full w-full">
-        <Posts />
-      </div>
+      <PostLayout>
+        <div className="w-full h-16 flex flex-row items-center justify-start p-4 gap-4">
+          <p className="text-lg font-extrabold text-black">Prisma Study</p>
+          <a className="text-black cursor-pointer" href="/submit">
+            submit
+          </a>
+        </div>
+        <div className="bg-[#f6f6ef] h-full w-full">
+          <Posts />
+        </div>
+      </PostLayout>
     </HydrationBoundary>
   );
 }
