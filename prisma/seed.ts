@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 const main = async () => {
   await prisma.post.deleteMany();
 
-  for (let index = 0; index < 25; index++) {
+  for (let index = 0; index < 100; index++) {
     const post = await prisma.post.create({
       data: {
         title: `${faker.animal.dog()} ${faker.airline.airplane().name}`,
