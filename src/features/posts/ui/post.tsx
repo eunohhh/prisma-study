@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 interface PostProps {
@@ -47,13 +46,11 @@ export const Post = ({ itemNo, title, url, votes, id }: PostProps) => {
               </Button>
               <span className="font-medium">{title}</span>
             </div>
-            <div className="flex items-center justify-center">
-              <Image
+            <div className="flex items-center justify-center relative w-full h-48">
+              <img
                 src={url}
                 alt={title}
-                width={100}
-                height={100}
-                className="object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
