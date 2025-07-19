@@ -7,3 +7,7 @@ export function getPosts(isServer: boolean) {
     ? serverApi.get<Post[], Post[]>("/api/posts")
     : api.get<Post[], Post[]>("/api/posts");
 }
+
+export function createPost(formData: FormData) {
+  return api.post<Post, Post>("/api/posts", formData);
+}
