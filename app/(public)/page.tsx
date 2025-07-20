@@ -1,9 +1,7 @@
 import { LIMIT, QUERY_KEYS } from "@/consts/constants";
 import { getPaginatedPosts } from "@/features/posts/apis";
-import { PostInfiniteQuery } from "@/features/posts/types";
 import PostLayout from "@/features/posts/ui/layout";
 import Posts from "@/features/posts/ui/posts";
-import { Post } from "@/generated/prisma";
 import {
   dehydrate,
   HydrationBoundary,
@@ -19,23 +17,28 @@ async function PostPage() {
   //   staleTime: 0,
   // });
 
-  await queryClient.prefetchInfiniteQuery<
-    PostInfiniteQuery,
-    Error,
-    Post[],
-    [string],
-    number
-  >({
-    queryKey: [QUERY_KEYS.POSTS],
-    initialPageParam: 1,
-    getNextPageParam: (lastPage, pages) => {
-      return lastPage.totalPages > pages.length ? pages.length + 1 : undefined;
-    },
-    queryFn: ({ pageParam }) => getPaginatedPosts(true, pageParam, LIMIT),
-    pages: 1,
-    // 1분으로 설정
-    staleTime: 1000 * 60,
+  await queryClient.prefetchQuery({
+    queryKey: [QUERY_KEYS.POSTS, 1],
+    queryFn: () => getPaginatedPosts(true, 1, LIMIT),
+    staleTime: 1000 * 60 * 5,
   });
+
+  // await queryClient.prefetchInfiniteQuery<
+  //   PostInfiniteQuery,
+  //   Error,
+  //   Post[],
+  //   [string],
+  //   number
+  // >({
+  //   queryKey: [QUERY_KEYS.POSTS],
+  //   initialPageParam: 1,
+  //   getNextPageParam: (lastPage, pages) => {
+  //     return lastPage.totalPages > pages.length ? pages.length + 1 : undefined;
+  //   },
+  //   queryFn: ({ pageParam }) => getPaginatedPosts(true, pageParam, LIMIT),
+  //   pages: 1,
+  //   staleTime: 0,
+  // });
 
   const dehydratedState = dehydrate(queryClient);
 
