@@ -8,7 +8,7 @@ import { Post } from "./post";
 function Posts() {
   const {
     data: posts,
-    isPending,
+    isFetching,
     error,
     fetchNextPage,
     hasNextPage,
@@ -32,7 +32,7 @@ function Posts() {
             />
           </li>
         ))}
-        {isPending && <div>Loading...</div>}
+        {isFetching && <div>Loading...</div>}
       </InfiniteScroll>
     </ol>
   );
