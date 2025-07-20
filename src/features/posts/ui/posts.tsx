@@ -15,10 +15,6 @@ function Posts() {
   } = usePostsInfiniteQuery();
 
   useEffect(() => {
-    console.log(hasNextPage);
-  }, [hasNextPage]);
-
-  useEffect(() => {
     if (error) console.error(error);
   }, [error]);
 
