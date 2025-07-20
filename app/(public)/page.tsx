@@ -33,7 +33,8 @@ async function PostPage() {
     },
     queryFn: ({ pageParam }) => getPaginatedPosts(true, pageParam, LIMIT),
     pages: 1,
-    staleTime: 0,
+    // 1분으로 설정
+    staleTime: 1000 * 60,
   });
 
   const dehydratedState = dehydrate(queryClient);
