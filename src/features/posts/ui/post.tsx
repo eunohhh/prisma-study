@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface PostProps {
   id: number;
@@ -15,11 +15,11 @@ interface PostProps {
 }
 
 export const Post = ({ itemNo, title, url, votes, id }: PostProps) => {
-  useEffect(() => {}, [votes]);
+  // useEffect(() => {}, [votes]);
 
   const [vote, controlVote] = useState<number>(votes);
 
-  const increaseVotes = async () => {
+  const increaseVotes = () => {
     try {
       controlVote((prev) => prev + 1);
     } catch (error) {
