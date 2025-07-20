@@ -4,3 +4,5 @@ export const BASE_URL =
 export const QUERY_KEYS = {
   POSTS: "posts",
 };
+
+export const LIMIT = 6;
