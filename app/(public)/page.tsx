@@ -1,7 +1,9 @@
-import { QUERY_KEYS } from "@/consts/constants";
-import { getPosts } from "@/features/posts/apis";
+import { LIMIT, QUERY_KEYS } from "@/consts/constants";
+import { getPaginatedPosts } from "@/features/posts/apis";
+import { PostInfiniteQuery } from "@/features/posts/types";
 import PostLayout from "@/features/posts/ui/layout";
 import Posts from "@/features/posts/ui/posts";
+import { Post } from "@/generated/prisma";
 import {
   dehydrate,
   HydrationBoundary,
@@ -11,9 +13,26 @@ import {
 async function PostPage() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
+  // await queryClient.prefetchQuery({
+  //   queryKey: [QUERY_KEYS.POSTS],
+  //   queryFn: () => getPosts(true),
+  //   staleTime: 0,
+  // });
+
+  await queryClient.prefetchInfiniteQuery<
+    PostInfiniteQuery,
+    Error,
+    Post[],
+    [string],
+    number
+  >({
     queryKey: [QUERY_KEYS.POSTS],
-    queryFn: () => getPosts(true),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.totalPages > pages.length ? pages.length + 1 : undefined;
+    },
+    queryFn: ({ pageParam }) => getPaginatedPosts(true, pageParam, LIMIT),
+    pages: 1,
     staleTime: 0,
   });
 
