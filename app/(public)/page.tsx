@@ -16,12 +16,15 @@ async function PostPage() {
   //   queryFn: () => getPosts(true),
   //   staleTime: 0,
   // });
-
-  await queryClient.prefetchQuery({
-    queryKey: [QUERY_KEYS.POSTS, 1],
-    queryFn: () => getPaginatedPosts(true, 1, LIMIT),
-    staleTime: 1000 * 60 * 5,
-  });
+  try {
+    await queryClient.prefetchQuery({
+      queryKey: [QUERY_KEYS.POSTS],
+      queryFn: () => getPaginatedPosts(true, 1, LIMIT),
+      staleTime: 1000 * 60 * 5,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 
   // await queryClient.prefetchInfiniteQuery<
   //   PostInfiniteQuery,
