@@ -47,11 +47,11 @@ export const Post = ({ itemNo, title, url, votes, id }: PostProps) => {
               <span className="font-medium">{title}</span>
             </div>
             <div className="flex items-center justify-center relative w-full h-48">
-              <img
+              {/* <img
                 src={url}
                 alt={title}
                 className="w-full h-full object-cover"
-              />
+              /> */}
             </div>
           </div>
         </div>
