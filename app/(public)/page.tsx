@@ -10,6 +10,8 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 
+export const dynamic = "force-static";
+
 async function PostPage() {
   const queryClient = new QueryClient();
 
@@ -44,6 +46,8 @@ async function PostPage() {
     pages: 1,
     staleTime: 1000 * 60 * 5,
   });
+
+  // console.log(queryClient.getQueryData([QUERY_KEYS.POSTS]));
 
   const dehydratedState = dehydrate(queryClient);
 

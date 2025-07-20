@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
 
   const response = {
     data: posts,
-    totalItems: posts.length,
+    totalItems: allPostsCount,
     totalPages: Math.ceil(allPostsCount / Number(limit)),
     currentPage: Number(page),
   };
