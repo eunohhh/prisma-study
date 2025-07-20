@@ -18,7 +18,7 @@ async function PostPage() {
   // });
   try {
     await queryClient.prefetchQuery({
-      queryKey: [QUERY_KEYS.POSTS],
+      queryKey: [QUERY_KEYS.POSTS, 1],
       queryFn: () => getPaginatedPosts(true, 1, LIMIT),
       staleTime: 1000 * 60 * 5,
     });
