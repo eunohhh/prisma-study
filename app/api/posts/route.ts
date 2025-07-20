@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
     currentPage: Number(page),
   };
 
-  console.log(response);
+  // console.log(response);
   return NextResponse.json(response, { status: 200 });
 }
 
