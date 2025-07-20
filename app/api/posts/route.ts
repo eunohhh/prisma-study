@@ -9,8 +9,12 @@ export async function GET(request: NextRequest) {
   const limit = searchParams.get("limit");
 
   if (!page || !limit) {
-    const posts = await prisma.post.findMany();
-    return NextResponse.json(posts, { status: 200 });
+    // const posts = await prisma.post.findMany();
+    // return NextResponse.json(posts, { status: 200 });
+    return NextResponse.json(
+      { error: "Missing required fields" },
+      { status: 400 }
+    );
   }
 
   const allPostsCount = await prisma.post.count();
