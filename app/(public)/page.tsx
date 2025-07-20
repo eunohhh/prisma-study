@@ -10,7 +10,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 async function PostPage() {
   const queryClient = new QueryClient();
